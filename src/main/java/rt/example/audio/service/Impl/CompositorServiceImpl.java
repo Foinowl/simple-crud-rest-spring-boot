@@ -1,6 +1,7 @@
 package rt.example.audio.service.Impl;
 
 import javax.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -11,15 +12,14 @@ import rt.example.audio.model.Compositor;
 import rt.example.audio.repository.CompositorRepository;
 import rt.example.audio.service.CompositorService;
 
-@Validated
 @Service
+@AllArgsConstructor
 public class CompositorServiceImpl implements CompositorService {
 
-    @Autowired
-    CompositorRepository compositorRepository;
+    private CompositorRepository compositorRepository;
 
     @Override
-    public long create(@Valid CreateCompositorRequest compositorRequest) {
+    public long create(CreateCompositorRequest compositorRequest) {
         var entity = new Compositor();
         entity.setBio(compositorRequest.getBio());
         entity.setDateBirth(compositorRequest.getDateBirth());
@@ -30,7 +30,7 @@ public class CompositorServiceImpl implements CompositorService {
     }
 
     @Override
-    public long update(@Valid UpdateCompositorRequest compositorRequest) {
+    public long update(UpdateCompositorRequest compositorRequest) {
 
         Compositor entity;
         try {
