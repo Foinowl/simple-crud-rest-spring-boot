@@ -1,28 +1,36 @@
 package rt.example.audio.model;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import java.util.stream.Collectors;
 
-@ToString(exclude = "melodies")
-@Setter
-@Getter
-@Entity
-@Table(name = "genres")
-public class Genres {
-    @Id
-    private Long id;
+public enum Genres {
+    CLASSIC("CLASSICAL"),
+    SCI_FI("SCI_FI"),
+    NOVEL("NOVEL"),
+    PROSE("PROSE"),
+    BIOGRAPHY("BIOGRAPHY");
 
-    private String name;
+    private static final Map<String, Genres> existingGenres =
+        Arrays.stream(Genres.values()).collect(Collectors.toMap(Genres::getGenre, genre -> genre));
 
-    private String description;
+    private final String genre;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "genres")
-    private Set<Melody> melodies;
+    Genres(String genre) {
+        this.genre = genre;
+    }
+
+    public static Set<Genres> filterRequestGenres(Set<String> strings) {
+        return strings.stream()
+            .map(String::toUpperCase)
+            .map(existingGenres::get)
+            .filter(Objects::nonNull)
+            .collect(Collectors.toSet());
+    }
+
+    public String getGenre() {
+        return genre;
+    }
 }

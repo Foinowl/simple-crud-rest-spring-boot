@@ -1,5 +1,6 @@
 package rt.example.audio.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -20,11 +21,14 @@ public class Musician {
     @Id
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
-    private Date date_birth;
+    @Column(name = "date_birth")
+    private Date dateBirth;
 
-    private Date date_start;
+    @Column(name = "date_start")
+    private Date dateStart;
 
     private String bio;
 
