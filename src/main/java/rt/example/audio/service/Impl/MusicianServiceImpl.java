@@ -1,26 +1,29 @@
 package rt.example.audio.service.Impl;
 
-import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Collection;
+import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 import rt.example.audio.dto.req.CreateMusicianRequest;
 import rt.example.audio.dto.req.UpdateMusicianRequest;
 import rt.example.audio.exception.NotFoundEntityException;
 import rt.example.audio.model.Musician;
 import rt.example.audio.repository.MusicianRepository;
 import rt.example.audio.service.MusicianService;
+import rt.example.audio.service.UtilService;
 
 
-@Validated
 @Service
+@AllArgsConstructor
 public class MusicianServiceImpl implements MusicianService {
 
-    @Autowired
-    MusicianRepository musicianRepository;
+    private MusicianRepository musicianRepository;
+
+    private UtilService utils;
+
 
     @Override
-    public long create(@Valid CreateMusicianRequest musicianRequest) {
+    public long create(CreateMusicianRequest musicianRequest) {
 
         Musician entity = new Musician();
         entity.setBio(musicianRequest.getBio());
@@ -32,7 +35,7 @@ public class MusicianServiceImpl implements MusicianService {
     }
 
     @Override
-    public long update(@Valid UpdateMusicianRequest updateRequest) {
+    public long update(UpdateMusicianRequest updateRequest) {
         Musician entity;
         try {
             entity = findById(updateRequest.getId());
@@ -48,8 +51,19 @@ public class MusicianServiceImpl implements MusicianService {
         return entity.getId();
     }
 
+    @Override
     public Musician findById(long id) {
         return musicianRepository.findById(id)
             .orElseThrow(() -> new NotFoundEntityException("Musician with id" + id + "not found"));
+    }
+
+    @Override
+    public List<Musician> findAll() {
+        return utils.returnEntity(musicianRepository.findAll(), "Couldn't find any musician from domain");
+    }
+
+    @Override
+    public List<Musician> findByIds(Collection<Long> ids) {
+        return utils.returnEntity(musicianRepository.findAllById(ids), "Couldn't find any musician from domain");
     }
 }

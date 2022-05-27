@@ -3,6 +3,7 @@ package rt.example.audio.dto.req;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -13,20 +14,23 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class UpdateCompositorRequest {
+public class UpdateMelodyRequest {
+
     @NotNull
     private Long id;
 
-    @NotNull
-    @NotBlank
     private String name;
 
     @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
     @JsonSerialize(using = DateSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date dateBirth;
+    private Date dateCreate;
 
-    @NotNull
-    @NotBlank
-    private String bio;
+    private Long duration;
+
+    private Set<String> genres;
+
+    private Long compositorId;
+
+    private Set<Long> musiciansId;
 }

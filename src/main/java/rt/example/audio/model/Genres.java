@@ -7,11 +7,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum Genres {
-    CLASSIC("CLASSICAL"),
-    SCI_FI("SCI_FI"),
     NOVEL("NOVEL"),
     PROSE("PROSE"),
-    BIOGRAPHY("BIOGRAPHY");
+    BIOGRAPHY("BIOGRAPHY"),
+    ROCK("ROCK"),
+    RAP("RAP"),
+    POP("POP"),
+    METAL("METAL"),
+    CLASSICAL("CLASSICAL");
 
     private static final Map<String, Genres> existingGenres =
         Arrays.stream(Genres.values()).collect(Collectors.toMap(Genres::getGenre, genre -> genre));
