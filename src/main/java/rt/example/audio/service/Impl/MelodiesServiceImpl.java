@@ -68,7 +68,8 @@ public class MelodiesServiceImpl implements MelodyService {
 
     @Override
     public List<Melody> search(SearchMelodyRequest param) {
-        return melodyRepository.search(param);
+        var lst =  melodyRepository.findAll(param.getArtistId());
+        return lst;
     }
 
 }

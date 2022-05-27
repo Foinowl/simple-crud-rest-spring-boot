@@ -14,7 +14,4 @@ public class SearchMelodyRequest {
     private Long compositorId;
 
     private String genre;
-
-    private int currentPage;
-    private int showPerPage;
 }
