@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rt.example.audio.dto.req.CreateMelodyRequest;
+import rt.example.audio.dto.req.SearchMelodyRequest;
 import rt.example.audio.dto.req.UpdateMelodyRequest;
 import rt.example.audio.model.Melody;
 import rt.example.audio.service.MelodyService;
@@ -42,4 +43,11 @@ public class MelodyController {
     public ResponseEntity<Long> updateMelody(@RequestBody UpdateMelodyRequest request) {
         return new ResponseEntity<>(melodyService.update(request), HttpStatus.CREATED);
     }
+
+    @PostMapping("search")
+    public ResponseEntity<List<Melody>> search(@RequestBody SearchMelodyRequest body) {
+        List<Melody> resp = melodyService.search(body);
+        return new ResponseEntity<>(resp, HttpStatus.OK);
+    }
+
 }

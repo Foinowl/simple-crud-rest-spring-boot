@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import rt.example.audio.dto.req.CreateMelodyRequest;
+import rt.example.audio.dto.req.SearchMelodyRequest;
 import rt.example.audio.dto.req.UpdateMelodyRequest;
 import rt.example.audio.model.Genres;
 import rt.example.audio.model.Melody;
@@ -64,4 +65,10 @@ public class MelodiesServiceImpl implements MelodyService {
     public List<Melody> findAll() {
         return utils.returnEntity(melodyRepository.findAll(), "Melodies not found");
     }
+
+    @Override
+    public List<Melody> search(SearchMelodyRequest param) {
+        return melodyRepository.search(param);
+    }
+
 }

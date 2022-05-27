@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import java.util.Date;
 import java.util.Set;
@@ -24,6 +27,25 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "melody")
+
+
+@NamedStoredProcedureQuery(
+    name = "melody_search",
+    procedureName = "public.melody_search",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class),
+//        @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class),
+//        @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class),
+//        @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class),
+//        @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class),
+//        @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class),
+
+    },
+    resultClasses = { Melody.class }
+)
+
 public class Melody {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
