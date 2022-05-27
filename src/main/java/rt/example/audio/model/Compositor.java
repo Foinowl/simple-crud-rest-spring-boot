@@ -10,9 +10,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Date;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Setter
@@ -32,6 +32,7 @@ public class Compositor {
 
     private String bio;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "compositor")
     private Set<Melody> melodies;
 }

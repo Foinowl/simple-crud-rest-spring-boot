@@ -24,12 +24,12 @@ public class MelodyController {
     private MelodyService melodyService;
 
     @GetMapping
-    public ResponseEntity<List<Melody>> getCompositors() {
+    public ResponseEntity<List<Melody>> getMelodies() {
         return new ResponseEntity<>(melodyService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Melody> getCompositor(@PathVariable("id") Long id) {
+    public ResponseEntity<Melody> getMelody(@PathVariable("id") Long id) {
         return new ResponseEntity<>(melodyService.findById(id), HttpStatus.OK);
     }
 

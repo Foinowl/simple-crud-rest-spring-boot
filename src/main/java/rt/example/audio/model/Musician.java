@@ -10,11 +10,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Date;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@ToString(exclude = "melodies")
 @Setter
 @Getter
 @Entity
@@ -35,6 +35,7 @@ public class Musician {
 
     private String bio;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "musician")
     private Set<Melody> melodies;
 }
