@@ -3,7 +3,6 @@ package rt.example.audio.service;
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import org.springframework.validation.annotation.Validated;
 import rt.example.audio.dto.req.CreateMusicianRequest;
 import rt.example.audio.dto.req.UpdateMusicianRequest;

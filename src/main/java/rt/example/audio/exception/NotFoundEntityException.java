@@ -1,6 +1,6 @@
 package rt.example.audio.exception;
 
-public class NotFoundEntityException extends RuntimeException{
+public class NotFoundEntityException extends RuntimeException {
     public NotFoundEntityException() {
     }
 
